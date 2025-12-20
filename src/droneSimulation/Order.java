@@ -18,6 +18,7 @@ public class Order {
         deliverable = d;
         urgency = u;
         cost = price;
+        status = "PENDING";
     }
 
     public Deliverable getDeliverable()
@@ -45,10 +46,17 @@ public class Order {
         status = s;
     }
 
+    @Override
     public boolean equals(Object o)
     {
         Order ord = (Order) o;
 
         return id == ord.id;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Order " + id + " | " + status + " | cost = " + cost;
     }
 }
