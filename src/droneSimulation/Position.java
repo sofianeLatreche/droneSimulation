@@ -30,6 +30,22 @@ public class Position {
     public void setX(double x) { this.x = x; }
     public void setY(double y) { this.y = y; }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        Position p = (Position) o;
 
+        if (x == p.x && y == p.y)
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "x = " + x + " , y = " + y;
+    }
 }
+
 
