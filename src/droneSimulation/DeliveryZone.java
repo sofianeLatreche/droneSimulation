@@ -9,4 +9,11 @@ public class DeliveryZone {
         radius = r;
     }
     
+    public boolean contains(Position p)
+    {
+        if (center.distanceTo(p) <= radius)
+            return true;
+
+        return false;
+    }
 }
