@@ -22,7 +22,6 @@ public class CityMap {
 
         return true;
     }
-
     public boolean isForbidden(Position p)
     {
         return !isAllowed(p);
