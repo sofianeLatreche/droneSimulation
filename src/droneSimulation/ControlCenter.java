@@ -49,7 +49,12 @@ public class ControlCenter {
     {
         Drone d = findDroneForOrder(o);
 
-        
+        if (d == null)
+        {
+            pendingOrders.add(o);
+            return false;
+        }
+
         double price = calculateDeliveryCost(o , d);
 
         o.setCost(price);
@@ -74,8 +79,13 @@ public class ControlCenter {
 
         double ins = o.getCost() * 0.02;
 
-        
+        if (ins < 10)
+            ins = 10;
+
+        if (o.getUrgency().equals("EXPRESS"))
+            ins = ins + 20;
 
         return op + ins;
     }
 }
+
