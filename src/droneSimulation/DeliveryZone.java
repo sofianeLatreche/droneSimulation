@@ -1,3 +1,5 @@
+package droneSimulation;
+
 public class DeliveryZone {
 
     protected Position center;
