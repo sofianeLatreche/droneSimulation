@@ -11,4 +11,21 @@ public class CityMap {
         deliveryZones = dz;
         noFlyZones = nfz;
     }
+    
+    public boolean isAllowed(Position p)
+    {
+        for (NoFlyZone z : noFlyZones)
+        {
+            if (z.contains(p))
+                return false;
+        }
+
+        return true;
+    }
+
+    public boolean isForbidden(Position p)
+    {
+        return !isAllowed(p);
+    }
 }
+
