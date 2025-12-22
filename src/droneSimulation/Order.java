@@ -1,62 +1,74 @@
 package droneSimulation;
-
 public class Order {
-
-    private static int count = 0;
-
+    private static int nextId = 1;
+    
+    public enum Status {
+        PENDING,
+        IN_PROGRESS,
+        DELIVERED,
+        FAILED
+    }
+    public enum Urgency {
+        NORMAL,
+        EXPRESS
+    }
     private int id;
     private String client;
     private Deliverable deliverable;
-    private double cost;
-    private String urgency;
-    private String status;
-
-    public Order(String c , Deliverable d , String u , double price)
-    {
-        id = ++count;
-        client = c;
-        deliverable = d;
-        urgency = u;
-        cost = price;
-        status = "PENDING";
+    private double cost; // in DZD
+    private Urgency urgency;
+    private Status status;
+    private int assignedDroneId;
+    
+    public Order(String client, Deliverable deliverable, Urgency urgency, double initialCost) {
+        this.id = nextId++;
+        this.client = client;
+        this.deliverable = deliverable;
+        this.cost = initialCost; 
+        this.urgency = urgency;
+        this.status = Status.PENDING;
+        this.assignedDroneId = -1; 
     }
-
-    public Deliverable getDeliverable()
-    {
-        return deliverable;
+    public int getId() { return id; }
+    public String getClient() { return client; }
+    public Deliverable getDeliverable() { return deliverable; }
+    public double getCost() { return cost; }
+    public void setCost(double cost) { this.cost = cost; }
+    public Urgency getUrgency() { return urgency; }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
+    public int getAssignedDroneId() { return assignedDroneId; }
+    public void setAssignedDroneId(int droneId) { this.assignedDroneId = droneId; }
+ 
+    public double getWeight() {
+        return deliverable.getWeight();
     }
-
-    public String getUrgency()
-    {
-        return urgency;
+    
+    public Position getDestination() {
+        return deliverable.getDestination();
     }
-
-    public double getCost()
-    {
-        return cost;
+    
+    public boolean isExpress() {
+        return urgency == Urgency.EXPRESS;
     }
-
-    public void setCost(double c)
-    {
-        cost = c;
-    }
-
-    public void setStatus(String s)
-    {
-        status = s;
-    }
-
+    
     @Override
-    public boolean equals(Object o)
-    {
-        Order ord = (Order) o;
-
-        return id == ord.id;
+    public String toString() {
+        return String.format("Order#%d for %s | %s | Cost: %.2f DZD | Status: %s | Drone: %s",
+                            id, client, deliverable, cost, status,
+                            assignedDroneId > 0 ? "#" + assignedDroneId : "Not assigned");
     }
-
+    
     @Override
-    public String toString()
-    {
-        return "Order " + id + " | " + status + " | cost = " + cost;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Order order = (Order) obj;
+        return id == order.id;
+    }
+    
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
