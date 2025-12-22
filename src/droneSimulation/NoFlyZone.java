@@ -1,7 +1,4 @@
 package droneSimulation;
-
-
-
 public class NoFlyZone {
     private Position center;
     private double radius; 
