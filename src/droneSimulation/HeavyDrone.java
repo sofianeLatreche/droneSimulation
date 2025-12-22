@@ -1,23 +1,20 @@
 package droneSimulation;
-
 public class HeavyDrone extends Drone {
-
-    public HeavyDrone(Position p)
-    {
-        super("Heavy" , 20 , 3.0 , p);
+    private static final double CONSUMPTION_PER_KM = 5.0; 
+    private static final double BASE_SPEED = 20.0; 
+    private static final double BASE_CAPACITY = 3.0; 
+    
+    public HeavyDrone(Position startPosition) {
+        super(startPosition, "HeavyDrone", BASE_SPEED, BASE_CAPACITY);
     }
-
-    public double calculateConsumption(double d)
-    {
-        return d * 5;
-    }
-
+    
     @Override
-    public void flyTo(Position dest , double step)
-    {
-        if (battery < 20)
-            speed = 16;
-
-        super.flyTo(dest , step);
+    public double calculateConsumption(double distance) {
+        return distance * CONSUMPTION_PER_KM;
+    }
+    
+    @Override
+    public String toString() {
+        return "Heavy" + super.toString();
     }
 }
