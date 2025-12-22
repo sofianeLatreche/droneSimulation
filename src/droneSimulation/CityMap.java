@@ -3,15 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 public class CityMap {
 
-    private List<DeliveryZone> deliveryZones;
-    private List<NoFlyZone> noFlyZones;
+    private List<DeliveryZone> deliveryZones; //good areas
+    private List<NoFlyZone> noFlyZones; //bad areas
     
     public Map() {
         this.deliveryZones = new ArrayList<>();
         this.noFlyZones = new ArrayList<>();
     }
     public boolean isAllowed(Position position) {
-        if (position == null) return false;
+        if (position == null) return false; //safety check 
         
         for (NoFlyZone zone : noFlyZones) {
             if (zone.contains(position)) {
@@ -21,7 +21,7 @@ public class CityMap {
         return true;
     }
   
-    public boolean isForbidden(Position position) {
+    public boolean isForbidden(Position position) {  //just clear things up !
         return !isAllowed(position);
     }
     
