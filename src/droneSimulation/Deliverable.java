@@ -1,7 +1,6 @@
 package droneSimulation;
 
 public interface Deliverable {
-
-    double getWeight();
+    double getWeight(); 
     Position getDestination();
 }
