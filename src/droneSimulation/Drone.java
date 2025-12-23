@@ -71,7 +71,7 @@ public abstract class Drone {
         
         return true;
     }
-    public boolean moveStep(Position destination) {
+    public boolean moveStep(Position destination) {   //update positions calculate distance and consumption
         if (destination == null || position.equals(destination)) {
             return true; // Already at destination
         }
