@@ -1,5 +1,4 @@
 package droneSimulation;
-package com;
 
 public class StandardPackage implements Deliverable {
     private static int nextId = 1;
@@ -14,5 +13,21 @@ public class StandardPackage implements Deliverable {
         this.description = description;
         this.weight = weight;
         this.destination = destination;
+    }
+    @Override
+    public double getWeight() {
+        return weight;
+    } 
+    @Override
+    public Position getDestination() {
+        return destination;
+    }
+    public int getId() { return id; }
+    public String getDescription() { return description; }
+    
+    @Override
+    public String toString() {
+        return String.format("Package#%d [%s] %.2fkg to %s", 
+                            id, description, weight, destination);
     }
 }
