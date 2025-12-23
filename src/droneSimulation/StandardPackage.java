@@ -1,30 +1,18 @@
 package droneSimulation;
+package com;
 
-
-public class ExpressDrone extends Drone {
-    private static final double CONSUMPTION_PER_KM = 4.0; 
-    private static final double BASE_SPEED = 45.0; 
-    private static final double BASE_CAPACITY = 1.0; 
+public class StandardPackage implements Deliverable {
+    private static int nextId = 1;
     
-    public ExpressDrone(Position startPosition) {
-        super(startPosition, "ExpressDrone", BASE_SPEED, BASE_CAPACITY);
-    }
+    private int id;
+    private String description;
+    private double weight; 
+    private Position destination;
     
-    @Override
-    public double calculateConsumption(double distance) {
-        return distance * CONSUMPTION_PER_KM;
-    }
-    
-    @Override
-    public double getSpeed() {
-        if (isBatteryLow()) {
-            return 16.0;
-        }
-        return super.getSpeed();
-    }
-    
-    @Override
-    public String toString() {
-        return "Express" + super.toString();
+    public StandardPackage(String description, double weight, Position destination) {
+        this.id = nextId++;
+        this.description = description;
+        this.weight = weight;
+        this.destination = destination;
     }
 }
